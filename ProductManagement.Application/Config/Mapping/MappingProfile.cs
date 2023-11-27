@@ -16,9 +16,8 @@ namespace ProductManagement.Application.Config.Mapping
             CreateMap<ProductDto, Product>()
                 .ReverseMap()
                 .ForMember(dest => dest.CategoryDescription, opt => opt.MapFrom(src => src.Category.Description));
-
-
             CreateMap<CategoryDto, Category>().ReverseMap();
+            CreateMap<UserDto, User>().ReverseMap();
         }
     }
 }

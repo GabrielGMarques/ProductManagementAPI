@@ -1,4 +1,5 @@
-﻿using ProductManagement.Application.Config.Mapping;
+﻿using Microsoft.Extensions.Configuration;
+using ProductManagement.Application.Config.Mapping;
 using ProductManagement.Application.Services;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Infra.Data.Repository;
@@ -19,6 +20,23 @@ namespace ProjectManagement.Test.Builders
             var mockRepository = new MockCategoryRepository();
             var mapper = AutoMapperConfiguration.Configure().CreateMapper();
             return new CategoryService(mockRepository, mapper);
+        }
+
+
+        public static IAuthService BuildAuthService()
+        {
+            var mockRepository = new MockUserRepository();
+            var mapper = AutoMapperConfiguration.Configure().CreateMapper();
+
+            var configuration = new ConfigurationBuilder()
+             .AddInMemoryCollection(new Dictionary<string, string?>
+             {
+                { "JwtSettings:Secret", "this is my custom Secret key for authentication" },
+                { "JwtSettings:ExpirationHours", "1" }
+             })
+             .Build();
+
+            return new AuthService(mockRepository, mapper, configuration);
         }
     }
 }

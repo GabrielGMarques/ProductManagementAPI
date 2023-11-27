@@ -27,7 +27,6 @@ namespace ProjectManagement.Test.Repository.Base
         public Task<int> CreateAsync(T entity)
         {
             _data.Add(entity);
-            // Assuming you have some logic to generate unique IDs
             entity.Id = GenerateUniqueId();
             return Task.FromResult(entity.Id);
         }
