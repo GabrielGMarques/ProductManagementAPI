@@ -47,20 +47,6 @@ namespace ProductManagement.Api.Controllers
 
             return Unauthorized(result);
         }
-
-        [HttpGet("user/{id}")]
-        [ProducesResponseType(typeof(ServiceResponse<UserDto?>), 200)]
-        [ProducesResponseType(typeof(ServiceResponse<UserDto?>), 404)]
-        public async Task<IActionResult> GetUser(int id)
-        {
-            var result = await _authService.GetAsync(id);
-
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return NotFound(new ServiceResponse<UserDto?>(false, result.Data, result.Message));
-        }
+      
     }
 }

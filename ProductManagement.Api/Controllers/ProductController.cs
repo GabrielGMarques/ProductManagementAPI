@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProductManagement.Api.Dtos;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Domain.Entities;
 using ProductManagement.Domain.Dtos;
 
 namespace ProductManagement.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class ProductController : ControllerBase
@@ -71,7 +71,7 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting paginated products.");
-                return StatusCode(500, new ResultDto<PaginatedResultDto<ProductDto>>(null, "Internal server error"));
+                return StatusCode(500, "Internal server error");
             }
         }
 

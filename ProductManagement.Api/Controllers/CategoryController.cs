@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProductManagement.Api.Dtos;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Domain.Entities;
 using ProductManagement.Domain.Dtos;
+using ProductManagement.Domain.Enums;
 
 namespace ProductManagement.Api.Controllers
 {
+    [Authorize]
+    [Authorize(Roles = "Admin")] //TODO use the UserRole enum
     [ApiController]
     [Route("api/[controller]")]
     public class CategoryController : ControllerBase

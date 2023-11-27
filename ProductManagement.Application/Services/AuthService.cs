@@ -52,6 +52,7 @@ namespace ProductManagement.Application.Services
 
             response.Success = true;
             response.Data = jwtToken;
+            response.Message = "User authenticated successfully";
 
             return response;
         }
@@ -102,7 +103,7 @@ namespace ProductManagement.Application.Services
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:Secret"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
