@@ -11,6 +11,6 @@ namespace ProductManagement.Domain.Contracts.Repository
     public interface IUserRepository : IGenericRepository<User>
     {
         Task<bool> UserExists(string username);
-        Task<User> GetUserByName(string username);
+        Task<User?> GetUserByName(string username);
     }
 }

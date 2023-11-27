@@ -20,7 +20,7 @@ namespace ProductManagement.Infra.Data.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<Product> GetAsync(int id)
+        public async Task<Product?> GetAsync(int id)
         {
             return await _dbContext.Products.FindAsync(id);
         }

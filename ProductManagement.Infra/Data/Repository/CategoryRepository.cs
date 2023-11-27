@@ -37,7 +37,7 @@ namespace ProductManagement.Infra.Data.Repository
             }
         }
 
-        public async Task<Category> GetAsync(int id)
+        public async Task<Category?> GetAsync(int id)
         {
             return await _dbContext.Categories.FindAsync(id);
         }

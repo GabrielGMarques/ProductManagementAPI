@@ -58,7 +58,7 @@ namespace ProductManagement.Infra.Data.Repository
             return await _dbContext.Users.AnyAsync(u => u.Username.ToLower() == username.ToLower());
         }
 
-        public async Task<User> GetUserByName(string username)
+        public async Task<User?> GetUserByName(string username)
         {
             return await _dbContext.Users.SingleOrDefaultAsync(u => u.Username.ToLower() == username.ToLower());
         }

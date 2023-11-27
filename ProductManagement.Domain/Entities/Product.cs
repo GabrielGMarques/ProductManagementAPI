@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ProductManagement.Domain.Entities.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProductManagement.Domain.Entities
 {
-    public class Product
+    public class Product : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         public string Description { get; set; } = string.Empty;
         public string? ProductCode { get; set; }
         public string? ProductReference { get; set; }

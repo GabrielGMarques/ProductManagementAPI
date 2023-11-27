@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProductManagement.Domain.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Domain.Entities
 {
-    public class Category
+    public class Category : BaseEntity
     {
-        [Key]
-        public int Id { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public virtual List<Product> Products { get; set; }
