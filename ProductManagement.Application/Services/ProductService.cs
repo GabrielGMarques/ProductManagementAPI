@@ -38,11 +38,11 @@ namespace ProductManagement.Application.Services
         public async Task<PaginatedResultDto<ProductDto>> GetPaginatedAsync(int page, int pageSize)
         {
             var paginatedResult = await _repository.GetPaginatedAsync(page, pageSize);
-            var mappedData = _mapper.Map<IEnumerable<ProductDto>>(paginatedResult.Data);
+            var mappedData = _mapper.Map<IEnumerable<ProductDto>>(paginatedResult.Items);
 
             return new PaginatedResultDto<ProductDto>
             {
-                Data = mappedData,
+                Items = mappedData,
                 TotalCount = paginatedResult.TotalCount,
                 Page = paginatedResult.Page,
                 PageSize = paginatedResult.PageSize

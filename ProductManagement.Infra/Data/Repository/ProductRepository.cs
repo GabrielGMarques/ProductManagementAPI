@@ -22,12 +22,16 @@ namespace ProductManagement.Infra.Data.Repository
 
         public async Task<Product?> GetAsync(int id)
         {
-            return await _dbContext.Products.FindAsync(id);
+            return await _dbContext.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<Product>> GetAsync()
         {
-            return await _dbContext.Products.ToListAsync();
+            return await _dbContext.Products
+                .Include(p => p.Category)
+                .ToListAsync();
         }
 
         public async Task<PaginatedResultDto<Product>> GetPaginatedAsync(int page, int pageSize)
@@ -42,7 +46,7 @@ namespace ProductManagement.Infra.Data.Repository
 
             return new PaginatedResultDto<Product>
             {
-                Data = paginatedData,
+                Items = paginatedData,
                 TotalCount = totalCount,
                 Page = page,
                 PageSize = pageSize

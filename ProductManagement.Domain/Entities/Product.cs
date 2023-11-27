@@ -12,9 +12,9 @@ namespace ProductManagement.Domain.Entities
         public int Stock { get; set; }
         public decimal Price { get; set; }
         public bool IsActive { get; set; }
-        public int IdCategory { get; set; }
+        public int CategoryId { get; set; }
 
-        [ForeignKey("IdCategory")]
+        [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
     }

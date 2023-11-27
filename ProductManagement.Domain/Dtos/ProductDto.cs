@@ -12,7 +12,7 @@ namespace ProductManagement.Domain.Dtos
         public int Stock { get; set; }
         public decimal Price { get; set; }
         public bool IsActive { get; set; }
-        public int IdCategory { get; set; }
+        public int CategoryId { get; set; }
         public string CategoryDescription { get; set; } = string.Empty;
     }
 }

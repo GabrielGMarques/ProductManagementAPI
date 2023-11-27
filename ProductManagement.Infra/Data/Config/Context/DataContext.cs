@@ -16,7 +16,7 @@ namespace ProductManagement.Infra.Data.Config.Context
             modelBuilder.Entity<Product>()
                 .HasOne(b => b.Category)
                 .WithMany(b => b.Products)
-                .HasForeignKey(b => b.IdCategory);
+                .HasForeignKey(b => b.CategoryId);
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

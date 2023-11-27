@@ -13,7 +13,11 @@ namespace ProductManagement.Application.Config.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<ProductDto, Product>().ReverseMap();
+            CreateMap<ProductDto, Product>()
+                .ReverseMap()
+                .ForMember(dest => dest.CategoryDescription, opt => opt.MapFrom(src => src.Category.Description));
+
+
             CreateMap<CategoryDto, Category>().ReverseMap();
         }
     }

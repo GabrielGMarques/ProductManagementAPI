@@ -61,7 +61,7 @@ namespace ProjectManagement.Test.Repository.Base
             var totalItems = _data.Count;
             var result = new PaginatedResultDto<T>()
             {
-                Data = paginatedData,
+                Items = paginatedData,
                 TotalCount = totalItems,
                 Page = page,
                 PageSize = pageSize
