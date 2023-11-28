@@ -22,9 +22,16 @@
       2. Run ```Update-Database``` to create the entities on the project
 
 
+
 ### Observations
-1. If I have more time I would:
+1. Endpoints are protected by authentication
+	1. To authenticate first create a user with the /auth/register endpoint 
+	2. Then use the login endpoint to get the JWT Token (A improvment would return the jwt token on this endpoint together with the id of the user)
+	3. Then authenticate with postman using ```bearer {{generated jwt token}}``
+2. Category endpoints are only available to users with the role Admin (UserRole.Admin). So in order to test it, first create a user with the Admin role and authenticate with it)
+3. If I have more time I would:
 	1. Configure the appsettings for production and staging environments
 	2. Add data validations on the controller
 	3. Add Dtos for each request if needed (for example login and registry, removing the unused properties from the swagger and adding and adding required properties for each request)
 	4. Standardize error codes and messages
+	5. Create a BaseRepository and BaseService for improving reusability between services and between repositories
