@@ -93,6 +93,22 @@ namespace ProductManagement.Api.Controllers
             }
         }
 
+        [HttpPatch("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(string), 500)]
+        public async Task<IActionResult> UpdateProductPartially([FromRoute] int id, [FromBody] ProductWriteDto product)
+        {
+            try
+            {
+                await _productService.UpdatePartiallyAsync(id, product);
+                return Ok("Product updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error updating product with ID: {id}.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(string), 200)]

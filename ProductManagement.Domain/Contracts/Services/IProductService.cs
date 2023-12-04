@@ -5,7 +5,7 @@ using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Domain.Contracts.Services
 {
-    public interface IProductService : IGenericReadService<ProductReadDto>, IGenericWriteService<ProductWriteDto>
+    public interface IProductService : IGenericReadService<ProductReadDto>, IGenericWriteService<ProductWriteDto, ProductWriteDto>
     {
     }
 }

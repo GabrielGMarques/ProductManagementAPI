@@ -96,6 +96,23 @@ namespace ProductManagement.Api.Controllers
             }
         }
 
+        [HttpPatch("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(string), 500)]
+        public async Task<IActionResult> UpdateCategoryPartially([FromRoute] int id, [FromBody] CategoryWriteDto category)
+        {
+            try
+            {
+                await _categoryService.UpdatePartiallyAsync(id, category);
+                return Ok("Category updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error updating category with ID: {id}.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 500)]
