@@ -60,6 +60,7 @@ namespace ProductManagement.Application.Services
             var product = _mapper.Map<Product>(entity);
             await _repository.UpdateAsync(product);
         }
+
         public async Task DeleteAsync(int id)
         {
             await _repository.DeleteAsync(id);

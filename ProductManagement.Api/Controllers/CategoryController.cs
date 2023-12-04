@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ProductManagement.Application.Services;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Dtos.CRUD;
 
@@ -55,6 +56,23 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting categories.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet("Paginated")]
+        [ProducesResponseType(typeof(PaginatedResultDto<CategoryDto>), 200)]
+        [ProducesResponseType(typeof(string), 500)]
+        public async Task<IActionResult> GetProductsPaginated(int page = 1, int pageSize = 10)
+        {
+            try
+            {
+                var paginatedResult = await _categoryService.GetPaginatedAsync(page, pageSize);
+                return Ok(paginatedResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting paginated products.");
                 return StatusCode(500, "Internal server error");
             }
         }

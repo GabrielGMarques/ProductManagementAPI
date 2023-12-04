@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Domain.Entities
 {
-    public class User : BaseEntity
+    public sealed class User : BaseEntity
     {
         public string Username { get; set; } = string.Empty;
         public byte[] PasswordHash { get; set; }

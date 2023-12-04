@@ -131,5 +131,32 @@ namespace ProjectManagement.Test
             var result = await categoryService.GetAsync(categoryId);
             Assert.IsNull(result);
         }
+
+        [TestMethod]
+        public async Task GetPaginatedCategoriesAsync_ShouldReturnPaginatedResult()
+        {
+            // Arrange
+            var page = 1;
+            var pageSize = 10;
+            var categories = Enumerable.Range(1, 20)
+                .Select(i => new CategoryDto
+                {
+                    Description = $"Description{i}",
+                    IsActive = true
+                })
+                .ToList();
+
+            var categoryService = MockServicesBuilder.BuildCategoryService();
+
+            foreach (var category in categories) await categoryService.CreateAsync(category);
+            // Act
+            var result = await categoryService.GetPaginatedAsync(page, pageSize);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.AreEqual(pageSize, result.Items.Count());
+            Assert.AreEqual(categories.Count, result.TotalCount);
+            Assert.AreEqual(pageSize, result.PageSize);
+        }
     }
 }

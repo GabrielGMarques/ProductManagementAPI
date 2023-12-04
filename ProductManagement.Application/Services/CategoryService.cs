@@ -51,9 +51,18 @@ namespace ProductManagement.Application.Services
             await _repository.DeleteAsync(id);
         }
 
-        public Task<PaginatedResultDto<CategoryDto>> GetPaginatedAsync(int page, int pageSize)
+        public async Task<PaginatedResultDto<CategoryDto>> GetPaginatedAsync(int page, int pageSize)
         {
-            throw new NotImplementedException();
+            var paginatedResult = await _repository.GetPaginatedAsync(page, pageSize);
+            var mappedData = _mapper.Map<IEnumerable<CategoryDto>>(paginatedResult.Items);
+
+            return new PaginatedResultDto<CategoryDto>
+            {
+                Items = mappedData,
+                TotalCount = paginatedResult.TotalCount,
+                Page = paginatedResult.Page,
+                PageSize = paginatedResult.PageSize
+            };
         }
     }
 }

@@ -47,9 +47,23 @@ namespace ProductManagement.Infra.Data.Repository
             return await _dbContext.Categories.ToListAsync();
         }
 
-        public Task<PaginatedResultDto<Category>> GetPaginatedAsync(int page, int pageSize)
+        public async Task<PaginatedResultDto<Category>> GetPaginatedAsync(int page, int pageSize)
         {
-            throw new NotImplementedException();
+            var query = _dbContext.Categories.AsQueryable();
+
+            var totalCount = await query.CountAsync();
+            var paginatedData = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return new PaginatedResultDto<Category>
+            {
+                Items = paginatedData,
+                TotalCount = totalCount,
+                Page = page,
+                PageSize = pageSize
+            };
         }
 
         public async Task UpdateAsync(Category entity)

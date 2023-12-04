@@ -7,8 +7,11 @@ namespace ProductManagement.Domain.Dtos.CRUD
     {
         public int Id { get; set; }
         [Required]
+        [MaxLength(300)]
         public string Description { get; set; } = string.Empty;
+        [MaxLength(50)]
         public string? ProductCode { get; set; }
+        [MaxLength(50)]
         public string? ProductReference { get; set; }
         [Required]
         public int Stock { get; set; }
