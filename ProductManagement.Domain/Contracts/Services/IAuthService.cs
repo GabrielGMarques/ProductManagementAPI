@@ -1,6 +1,6 @@
-﻿using ProductManagement.Domain.Dtos.Auth;
-using ProductManagement.Domain.Dtos.Responses;
-using ProductManagement.Domain.Dtos.CRUD;
+﻿using ProductManagement.Domain.Shared.Responses;
+using ProductManagement.Domain.Shared.Dtos;
+using ProductManagement.Domain.Shared.Dtos;
 
 namespace ProductManagement.Domain.Contracts.Services
 {

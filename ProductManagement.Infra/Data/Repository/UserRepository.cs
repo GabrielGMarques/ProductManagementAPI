@@ -2,7 +2,7 @@
 using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Entities;
 using ProductManagement.Infra.Data.Config.Context;
-using ProductManagement.Domain.Dtos.Responses;
+using ProductManagement.Domain.Shared.Responses;
 
 namespace ProductManagement.Infra.Data.Repository
 {

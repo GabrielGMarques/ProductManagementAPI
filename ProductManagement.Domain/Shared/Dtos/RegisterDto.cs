@@ -1,7 +1,7 @@
-﻿using ProductManagement.Domain.Entities.Enums;
+﻿using ProductManagement.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace ProductManagement.Domain.Dtos.Auth
+namespace ProductManagement.Domain.Shared.Dtos
 {
     public class RegisterDto
     {
@@ -11,7 +11,7 @@ namespace ProductManagement.Domain.Dtos.Auth
         public string Username { get; set; } = string.Empty;
         [Required]
         [MaxLength(50)]
-        [MinLength(6)] 
+        [MinLength(6)]
         public string Password { get; set; } = string.Empty;
         [Required]
         public UserRole Role { get; set; }

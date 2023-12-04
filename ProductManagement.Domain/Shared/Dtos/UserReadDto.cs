@@ -1,12 +1,7 @@
-﻿using ProductManagement.Domain.Entities.Enums;
-using System;
-using System.Collections.Generic;
+﻿using ProductManagement.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProductManagement.Domain.Dtos.CRUD
+namespace ProductManagement.Domain.Shared.Dtos
 {
     public class UserReadDto
     {

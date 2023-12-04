@@ -1,5 +1,5 @@
 ﻿using ProductManagement.Domain.Entities.Base;
-using ProductManagement.Domain.Dtos.Responses;
+using ProductManagement.Domain.Shared.Responses;
 
 namespace ProductManagement.Domain.Contracts.Repository.Base
 {

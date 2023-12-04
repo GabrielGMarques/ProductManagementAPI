@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProductManagement.Domain.Dtos.Auth
+namespace ProductManagement.Domain.Shared.Dtos
 {
     public class LoginDto
     {

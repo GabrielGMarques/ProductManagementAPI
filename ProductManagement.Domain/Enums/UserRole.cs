@@ -1,4 +1,4 @@
-﻿namespace ProductManagement.Domain.Entities.Enums
+﻿namespace ProductManagement.Domain.Enums
 {
     public enum UserRole
     {

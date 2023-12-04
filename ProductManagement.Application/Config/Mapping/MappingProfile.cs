@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Dtos.Auth;
-using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Shared.Dtos;
+using ProductManagement.Domain.Shared.Dtos;
 
 namespace ProductManagement.Application.Config.Mapping
 {

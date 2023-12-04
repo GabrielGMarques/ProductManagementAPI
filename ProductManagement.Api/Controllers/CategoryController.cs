@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Domain.Dtos.CRUD;
-using ProductManagement.Domain.Dtos.Responses;
+using ProductManagement.Domain.Shared.Dtos;
+using ProductManagement.Domain.Shared.Responses;
 
 namespace ProductManagement.Api.Controllers
 {

@@ -8,9 +8,9 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using ProductManagement.Domain.Dtos.Auth;
-using ProductManagement.Domain.Dtos.Responses;
-using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Shared.Responses;
+using ProductManagement.Domain.Shared.Dtos;
+using ProductManagement.Domain.Shared.Dtos;
 
 namespace ProductManagement.Application.Services
 {

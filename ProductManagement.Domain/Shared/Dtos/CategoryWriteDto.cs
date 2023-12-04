@@ -1,4 +1,4 @@
-﻿namespace ProductManagement.Domain.Dtos.CRUD
+﻿namespace ProductManagement.Domain.Shared.Dtos
 {
     public class CategoryWriteDto
     {

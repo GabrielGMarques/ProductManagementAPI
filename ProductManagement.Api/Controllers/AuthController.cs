@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Domain.Dtos.Auth;
+using ProductManagement.Domain.Shared.Dtos;
 
 namespace ProductManagement.Api.Controllers
 {

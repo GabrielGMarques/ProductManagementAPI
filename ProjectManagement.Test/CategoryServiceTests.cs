@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Shared.Dtos;
 using ProjectManagement.Test.Builders;
 
 namespace ProjectManagement.Test

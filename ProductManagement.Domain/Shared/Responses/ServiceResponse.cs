@@ -1,4 +1,4 @@
-﻿namespace ProductManagement.Domain.Dtos.Responses
+﻿namespace ProductManagement.Domain.Shared.Responses
 {
     public class ServiceResponse<T>
     {

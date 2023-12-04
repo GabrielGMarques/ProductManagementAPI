@@ -2,8 +2,8 @@
 using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Dtos.CRUD;
-using ProductManagement.Domain.Dtos.Responses;
+using ProductManagement.Domain.Shared.Dtos;
+using ProductManagement.Domain.Shared.Responses;
 
 namespace ProductManagement.Application.Services
 {

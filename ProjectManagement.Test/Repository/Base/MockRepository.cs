@@ -1,5 +1,5 @@
 ﻿using ProductManagement.Domain.Contracts.Repository.Base;
-using ProductManagement.Domain.Dtos.Responses;
+using ProductManagement.Domain.Shared.Responses;
 using ProductManagement.Domain.Entities.Base;
 
 namespace ProjectManagement.Test.Repository.Base

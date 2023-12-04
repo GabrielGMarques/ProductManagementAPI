@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ProductManagement.Domain.Dtos.Auth;
-using ProductManagement.Domain.Entities.Enums;
+using ProductManagement.Domain.Enums;
+using ProductManagement.Domain.Shared.Dtos;
 using ProjectManagement.Test.Builders;
 
 namespace ProjectManagement.Test

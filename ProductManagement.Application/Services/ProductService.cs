@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProductManagement.Domain.Dtos.CRUD;
-using ProductManagement.Domain.Dtos.Responses;
+using ProductManagement.Domain.Shared.Dtos;
+using ProductManagement.Domain.Shared.Responses;
 
 namespace ProductManagement.Application.Services
 {
