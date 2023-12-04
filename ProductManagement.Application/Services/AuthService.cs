@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ProductManagement.Domain.Shared.Responses;
 using ProductManagement.Domain.Shared.Dtos;
-using ProductManagement.Domain.Shared.Dtos;
 
 namespace ProductManagement.Application.Services
 {

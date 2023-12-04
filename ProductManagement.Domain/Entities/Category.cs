@@ -1,5 +1,5 @@
-﻿using ProductManagement.Domain.Entities.Base;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using ProductManagement.Domain.Entities.Base;
 
 namespace ProductManagement.Domain.Entities
 {

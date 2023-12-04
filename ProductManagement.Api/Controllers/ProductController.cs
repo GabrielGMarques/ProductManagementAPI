@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Api.Common;
-using ProductManagement.Application.Services;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Domain.Entities;
 using ProductManagement.Domain.Shared.Dtos;
 using ProductManagement.Domain.Shared.Responses;
 
