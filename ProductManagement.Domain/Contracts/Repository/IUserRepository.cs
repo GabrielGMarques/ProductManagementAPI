@@ -1,7 +1,7 @@
-﻿using ProductManagement.Domain.Contracts.Repository.Base;
+﻿using ProductManagement.Domain.Contracts.Repositories.Base;
 using ProductManagement.Domain.Entities;
 
-namespace ProductManagement.Domain.Contracts.Repository
+namespace ProductManagement.Domain.Contracts.Repositories
 {
     public interface IUserRepository : IGenericRepository<User>
     {

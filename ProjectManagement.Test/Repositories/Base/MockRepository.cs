@@ -1,4 +1,4 @@
-﻿using ProductManagement.Domain.Contracts.Repository.Base;
+﻿using ProductManagement.Domain.Contracts.Repositories.Base;
 using ProductManagement.Domain.Shared.Responses;
 using ProductManagement.Domain.Entities.Base;
 

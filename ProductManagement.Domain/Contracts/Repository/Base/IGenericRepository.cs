@@ -1,7 +1,7 @@
 ﻿using ProductManagement.Domain.Entities.Base;
 using ProductManagement.Domain.Shared.Responses;
 
-namespace ProductManagement.Domain.Contracts.Repository.Base
+namespace ProductManagement.Domain.Contracts.Repositories.Base
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {

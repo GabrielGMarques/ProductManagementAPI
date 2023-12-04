@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProductManagement.Domain.Contracts.Repository;
+using ProductManagement.Domain.Contracts.Repositories;
 using ProductManagement.Infra.Data.Config.Context;
-using ProductManagement.Infra.Data.Repository;
+using ProductManagement.Infra.Data.Repositories;
 
 namespace ProductManagement.Infra.Data.Config
 {

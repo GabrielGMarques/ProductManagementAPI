@@ -2,7 +2,7 @@
 using ProductManagement.Application.Config.Mapping;
 using ProductManagement.Application.Services;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Infra.Data.Repository;
+using ProductManagement.Infra.Data.Repositories;
 
 namespace ProjectManagement.Test.Builders
 {

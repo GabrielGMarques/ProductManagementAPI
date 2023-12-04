@@ -1,8 +1,8 @@
-﻿using ProductManagement.Domain.Contracts.Repository;
+﻿using ProductManagement.Domain.Contracts.Repositories;
 using ProductManagement.Domain.Entities;
 using ProjectManagement.Test.Repository.Base;
 
-namespace ProductManagement.Infra.Data.Repository
+namespace ProductManagement.Infra.Data.Repositories
 {
     public class MockUserRepository : MockRepository<User>, IUserRepository
     {

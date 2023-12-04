@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ProductManagement.Domain.Contracts.Repository;
+using ProductManagement.Domain.Contracts.Repositories;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Entities;
 using ProductManagement.Domain.Shared.Dtos;
