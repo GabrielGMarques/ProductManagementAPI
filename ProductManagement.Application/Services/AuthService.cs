@@ -2,14 +2,15 @@
 using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Dtos;
 using System.Text;
 using System.Security.Cryptography;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using ProductManagement.Domain.Responses;
+using ProductManagement.Domain.Dtos.Auth;
+using ProductManagement.Domain.Dtos.Responses;
+using ProductManagement.Domain.Dtos;
 
 namespace ProductManagement.Application.Services
 {
@@ -35,7 +36,7 @@ namespace ProductManagement.Application.Services
         }
 
 
-        public async Task<ServiceResponse<string?>> Login(UserDto userDto)
+        public async Task<ServiceResponse<string?>> Login(LoginDto userDto)
         {
             var response = new ServiceResponse<string?>();
 
@@ -58,7 +59,7 @@ namespace ProductManagement.Application.Services
         }
 
 
-        public async Task<ServiceResponse<int?>> Register(UserDto userDto)
+        public async Task<ServiceResponse<int?>> Register(RegisterDto userDto)
         {
             var response = new ServiceResponse<int?>();
 

@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Domain.Dtos;
-using ProductManagement.Domain.Enums;
+using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Api.Controllers
 {

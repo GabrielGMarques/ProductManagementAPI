@@ -1,5 +1,5 @@
 ﻿using ProductManagement.Domain.Contracts.Repository.Base;
-using ProductManagement.Domain.Dtos;
+using ProductManagement.Domain.Dtos.CRUD;
 using ProductManagement.Domain.Entities.Base;
 using System;
 using System.Collections.Generic;

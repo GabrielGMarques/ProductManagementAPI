@@ -1,10 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ProductManagement.Application.Services;
-using ProductManagement.Domain.Contracts.Repository;
-using ProductManagement.Domain.Dtos;
-using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Enums;
-using ProductManagement.Domain.Responses;
+using ProductManagement.Domain.Dtos.Auth;
+using ProductManagement.Domain.Entities.Enums;
 using ProjectManagement.Test.Builders;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +18,21 @@ namespace ProjectManagement.Test
             // Arrange
             var authService = MockServicesBuilder.BuildAuthService();
 
-            var userDto = new UserDto
+            var userDto = new LoginDto
             {
                 Username = "TestUser",
-                Password = "TestPassword",
+                Password = "TestPassword"
+            };
+
+            var registerDto = new RegisterDto
+            {
+                Username = userDto.Username,
+                Password = userDto.Password,
                 Role = UserRole.User
             };
 
-            var serviceResponse = await authService.Register(userDto);
+
+            var serviceResponse = await authService.Register(registerDto);
 
             var userId = serviceResponse.Data.Value;
             // Act
@@ -48,14 +51,20 @@ namespace ProjectManagement.Test
             // Arrange
             var authService = MockServicesBuilder.BuildAuthService();
 
-            var userDto = new UserDto
+            var userDto = new LoginDto
             {
                 Username = "TestUser",
-                Password = "TestPassword",
+                Password = "TestPassword"
+            };
+
+            var registerDto = new RegisterDto
+            {
+                Username = userDto.Username,
+                Password = userDto.Password,
                 Role = UserRole.User
             };
 
-            await authService.Register(userDto);
+            await authService.Register(registerDto);
             
             // Act
             var result = await authService.Login(userDto);
@@ -72,14 +81,20 @@ namespace ProjectManagement.Test
             // Arrange
             var authService = MockServicesBuilder.BuildAuthService();
 
-            var userDto = new UserDto
+            var userDto = new LoginDto
             {
                 Username = "TestUser",
-                Password = "TestPassword",
+                Password = "TestPassword"
+            };
+
+            var registerDto = new RegisterDto
+            {
+                Username = userDto.Username,
+                Password = userDto.Password,
                 Role = UserRole.User
             };
 
-            await authService.Register(userDto);
+            await authService.Register(registerDto);
 
             userDto.Password = "WrongPassword";
             // Act
@@ -97,15 +112,21 @@ namespace ProjectManagement.Test
             // Arrange
             var authService = MockServicesBuilder.BuildAuthService();
 
-            var userDto = new UserDto
+            var userDto = new LoginDto
             {
                 Username = "NewUser",
-                Password = "NewPassword",
+                Password = "NewPassword"
+            };
+
+            var registerDto = new RegisterDto
+            {
+                Username = userDto.Username,
+                Password = userDto.Password,
                 Role = UserRole.User
             };
 
             // Act
-            var result = await authService.Register(userDto);
+            var result = await authService.Register(registerDto);
 
             // Assert
             Assert.IsTrue(result.Success);
@@ -118,16 +139,17 @@ namespace ProjectManagement.Test
             // Arrange
             var authService = MockServicesBuilder.BuildAuthService();
 
-            var userDto = new UserDto
+            var registerDto = new RegisterDto
             {
                 Username = "NewUser",
                 Password = "NewPassword",
                 Role = UserRole.User
             };
 
+
             // Act
-            await authService.Register(userDto);
-            var result = await authService.Register(userDto);
+            await authService.Register(registerDto);
+            var result = await authService.Register(registerDto);
 
             // Assert
             Assert.IsFalse(result.Success);

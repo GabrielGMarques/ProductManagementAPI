@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Domain.Dtos;
+using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Api.Controllers
 {
@@ -78,7 +78,7 @@ namespace ProductManagement.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(int), 200)]
         [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> CreateProduct(ProductDto product)
+        public async Task<IActionResult> CreateProduct(ProductCreationDto product)
         {
             try
             {
@@ -95,7 +95,7 @@ namespace ProductManagement.Api.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> UpdateProduct(ProductDto product)
+        public async Task<IActionResult> UpdateProduct(ProductCreationDto product)
         {
             try
             {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductManagement.Domain.Responses
+namespace ProductManagement.Domain.Dtos.Responses
 {
     public class ServiceResponse<T>
     {

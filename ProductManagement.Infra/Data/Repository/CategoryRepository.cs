@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Dtos;
 using ProductManagement.Infra.Data.Config.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Infra.Data.Repository
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly DataContext _dbContext; // Replace YourDbContext with the actual name of your DbContext
+        private readonly DataContext _dbContext;
 
-        public CategoryRepository(DataContext dbContext) // Replace YourDbContext with the actual name of your DbContext
+        public CategoryRepository(DataContext dbContext)
         {
             _dbContext = dbContext;
         }

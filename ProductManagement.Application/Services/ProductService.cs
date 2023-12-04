@@ -3,12 +3,12 @@ using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Contracts.Services.Base;
 using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Application.Services
 {
@@ -49,13 +49,13 @@ namespace ProductManagement.Application.Services
             };
         }
 
-        public async Task<int> CreateAsync(ProductDto entity)
+        public async Task<int> CreateAsync(ProductCreationDto entity)
         {
             var product = _mapper.Map<Product>(entity);
             return await _repository.CreateAsync(product);
         }
 
-        public async Task UpdateAsync(ProductDto entity)
+        public async Task UpdateAsync(ProductCreationDto entity)
         {
             var product = _mapper.Map<Product>(entity);
             await _repository.UpdateAsync(product);

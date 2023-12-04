@@ -1,11 +1,10 @@
 ﻿using ProductManagement.Domain.Contracts.Services.Base;
 using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Dtos;
+using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Domain.Contracts.Services
 {
-    public interface IProductService : IGenericService<ProductDto>
+    public interface IProductService : IGenericReadService<ProductDto>, IGenericWriteService<ProductCreationDto>
     {
-
     }
 }

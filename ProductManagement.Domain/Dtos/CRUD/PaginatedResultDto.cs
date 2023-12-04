@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductManagement.Domain.Dtos
+namespace ProductManagement.Domain.Dtos.CRUD
 {
     public class PaginatedResultDto<T>
     {

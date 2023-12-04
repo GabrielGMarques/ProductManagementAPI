@@ -2,12 +2,13 @@
 using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Contracts.Services.Base;
 
 namespace ProductManagement.Application.Services
 {
@@ -34,11 +35,6 @@ namespace ProductManagement.Application.Services
             return _mapper.Map<IEnumerable<CategoryDto>>(categories);
         }
 
-        public Task<PaginatedResultDto<ProductDto>> GetPaginatedAsync(int page, int pageSize)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<int> CreateAsync(CategoryDto entity)
         {
             var category = _mapper.Map<Category>(entity);
@@ -55,5 +51,9 @@ namespace ProductManagement.Application.Services
             await _repository.DeleteAsync(id);
         }
 
+        public Task<PaginatedResultDto<CategoryDto>> GetPaginatedAsync(int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

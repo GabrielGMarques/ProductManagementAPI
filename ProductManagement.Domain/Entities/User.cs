@@ -1,5 +1,5 @@
 ﻿using ProductManagement.Domain.Entities.Base;
-using ProductManagement.Domain.Enums;
+using ProductManagement.Domain.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

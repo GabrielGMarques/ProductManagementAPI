@@ -1,11 +1,11 @@
 ﻿using ProductManagement.Domain.Entities;
-using ProductManagement.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProductManagement.Domain.Entities.Base;
+using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Domain.Contracts.Repository.Base
 {

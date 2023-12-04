@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Dtos;
-using ProductManagement.Domain.Responses;
+using ProductManagement.Domain.Dtos.Auth;
 
 namespace ProductManagement.Api.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : Controller
     {
         private readonly ILogger<AuthController> _logger;
@@ -21,7 +23,7 @@ namespace ProductManagement.Api.Controllers
         [HttpPost("register")]
         [ProducesResponseType(typeof(int?), 200)]
         [ProducesResponseType(typeof(int?), 400)]
-        public async Task<IActionResult> Register(UserDto userDto)
+        public async Task<IActionResult> Register(RegisterDto userDto)
         {
             var result = await _authService.Register(userDto);
 
@@ -36,7 +38,7 @@ namespace ProductManagement.Api.Controllers
         [HttpPost("login")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 401)]
-        public async Task<IActionResult> Login(UserDto userDto)
+        public async Task<IActionResult> Login(LoginDto userDto)
         {
             var result = await _authService.Login(userDto);
 
