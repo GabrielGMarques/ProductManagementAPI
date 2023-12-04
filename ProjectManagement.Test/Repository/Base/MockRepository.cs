@@ -1,5 +1,5 @@
 ﻿using ProductManagement.Domain.Contracts.Repository.Base;
-using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Dtos.Responses;
 using ProductManagement.Domain.Entities.Base;
 using System;
 using System.Collections.Generic;
@@ -54,11 +54,11 @@ namespace ProjectManagement.Test.Repository.Base
             return Task.CompletedTask;
         }
 
-        public Task<PaginatedResultDto<T>> GetPaginatedAsync(int page, int pageSize)
+        public Task<PaginatedResult<T>> GetPaginatedAsync(int page, int pageSize)
         {
             var paginatedData = _data.Skip((page - 1) * pageSize).Take(pageSize);
             var totalItems = _data.Count;
-            var result = new PaginatedResultDto<T>()
+            var result = new PaginatedResult<T>()
             {
                 Items = paginatedData,
                 TotalCount = totalItems,

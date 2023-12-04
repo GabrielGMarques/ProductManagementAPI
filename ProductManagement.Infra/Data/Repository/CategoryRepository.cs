@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Infra.Data.Repository
 {
@@ -47,7 +47,7 @@ namespace ProductManagement.Infra.Data.Repository
             return await _dbContext.Categories.ToListAsync();
         }
 
-        public async Task<PaginatedResultDto<Category>> GetPaginatedAsync(int page, int pageSize)
+        public async Task<PaginatedResult<Category>> GetPaginatedAsync(int page, int pageSize)
         {
             var query = _dbContext.Categories.AsQueryable();
 
@@ -57,7 +57,7 @@ namespace ProductManagement.Infra.Data.Repository
                 .Take(pageSize)
                 .ToListAsync();
 
-            return new PaginatedResultDto<Category>
+            return new PaginatedResult<Category>
             {
                 Items = paginatedData,
                 TotalCount = totalCount,

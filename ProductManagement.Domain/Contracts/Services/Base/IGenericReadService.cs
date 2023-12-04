@@ -1,6 +1,6 @@
 ﻿
 using ProductManagement.Domain.Dtos;
-using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Domain.Contracts.Services.Base
 {
@@ -8,7 +8,7 @@ namespace ProductManagement.Domain.Contracts.Services.Base
     {
         Task<T> GetAsync(int id);
         Task<IEnumerable<T>> GetAsync();
-        Task<PaginatedResultDto<T>> GetPaginatedAsync(int page, int pageSize);
+        Task<PaginatedResult<T>> GetPaginatedAsync(int page, int pageSize);
 
     }
 }

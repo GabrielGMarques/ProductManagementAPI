@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductManagement.Domain.Dtos.CRUD
+namespace ProductManagement.Domain.Dtos.Responses
 {
-    public class PaginatedResultDto<T>
+    public class PaginatedResult<T>
     {
         public IEnumerable<T> Items { get; set; }
         public int TotalCount { get; set; }

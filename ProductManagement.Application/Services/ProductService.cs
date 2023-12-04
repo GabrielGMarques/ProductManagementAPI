@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Application.Services
 {
@@ -23,24 +24,24 @@ namespace ProductManagement.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ProductDto> GetAsync(int id)
+        public async Task<ProductReadDto> GetAsync(int id)
         {
             var product = await _repository.GetAsync(id);
-            return _mapper.Map<ProductDto>(product);
+            return _mapper.Map<ProductReadDto>(product);
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAsync()
+        public async Task<IEnumerable<ProductReadDto>> GetAsync()
         {
             var products = await _repository.GetAsync();
-            return _mapper.Map<IEnumerable<ProductDto>>(products);
+            return _mapper.Map<IEnumerable<ProductReadDto>>(products);
         }
 
-        public async Task<PaginatedResultDto<ProductDto>> GetPaginatedAsync(int page, int pageSize)
+        public async Task<PaginatedResult<ProductReadDto>> GetPaginatedAsync(int page, int pageSize)
         {
             var paginatedResult = await _repository.GetPaginatedAsync(page, pageSize);
-            var mappedData = _mapper.Map<IEnumerable<ProductDto>>(paginatedResult.Items);
+            var mappedData = _mapper.Map<IEnumerable<ProductReadDto>>(paginatedResult.Items);
 
-            return new PaginatedResultDto<ProductDto>
+            return new PaginatedResult<ProductReadDto>
             {
                 Items = mappedData,
                 TotalCount = paginatedResult.TotalCount,
@@ -49,13 +50,13 @@ namespace ProductManagement.Application.Services
             };
         }
 
-        public async Task<int> CreateAsync(ProductCreationDto entity)
+        public async Task<int> CreateAsync(ProductWriteDto entity)
         {
             var product = _mapper.Map<Product>(entity);
             return await _repository.CreateAsync(product);
         }
 
-        public async Task UpdateAsync(ProductCreationDto entity)
+        public async Task UpdateAsync(ProductWriteDto entity)
         {
             var product = _mapper.Map<Product>(entity);
             await _repository.UpdateAsync(product);
@@ -66,5 +67,9 @@ namespace ProductManagement.Application.Services
             await _repository.DeleteAsync(id);
         }
 
+        public Task UpdateCategoryAsync(int idCategory)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -4,7 +4,8 @@ using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Domain.Contracts.Services
 {
-    public interface IProductService : IGenericReadService<ProductDto>, IGenericWriteService<ProductCreationDto>
+    public interface IProductService : IGenericReadService<ProductReadDto>, IGenericWriteService<ProductWriteDto>
     {
+        Task UpdateCategoryAsync(int idCategory);
     }
 }

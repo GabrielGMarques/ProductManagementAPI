@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProductManagement.Domain.Dtos.CRUD;
 using ProductManagement.Domain.Contracts.Services.Base;
+using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Application.Services
 {
@@ -51,12 +52,12 @@ namespace ProductManagement.Application.Services
             await _repository.DeleteAsync(id);
         }
 
-        public async Task<PaginatedResultDto<CategoryDto>> GetPaginatedAsync(int page, int pageSize)
+        public async Task<PaginatedResult<CategoryDto>> GetPaginatedAsync(int page, int pageSize)
         {
             var paginatedResult = await _repository.GetPaginatedAsync(page, pageSize);
             var mappedData = _mapper.Map<IEnumerable<CategoryDto>>(paginatedResult.Items);
 
-            return new PaginatedResultDto<CategoryDto>
+            return new PaginatedResult<CategoryDto>
             {
                 Items = mappedData,
                 TotalCount = paginatedResult.TotalCount,

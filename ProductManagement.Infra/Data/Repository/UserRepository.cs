@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Infra.Data.Repository
 {
@@ -63,7 +63,7 @@ namespace ProductManagement.Infra.Data.Repository
             return await _dbContext.Users.SingleOrDefaultAsync(u => u.Username.ToLower() == username.ToLower());
         }
 
-        public Task<PaginatedResultDto<User>> GetPaginatedAsync(int page, int pageSize)
+        public Task<PaginatedResult<User>> GetPaginatedAsync(int page, int pageSize)
         {
             throw new NotImplementedException();
         }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Application.Services;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Api.Controllers
 {
@@ -61,7 +62,7 @@ namespace ProductManagement.Api.Controllers
         }
 
         [HttpGet("Paginated")]
-        [ProducesResponseType(typeof(PaginatedResultDto<CategoryDto>), 200)]
+        [ProducesResponseType(typeof(PaginatedResult<CategoryDto>), 200)]
         [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> GetProductsPaginated(int page = 1, int pageSize = 10)
         {

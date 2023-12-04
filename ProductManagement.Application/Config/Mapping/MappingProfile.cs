@@ -16,10 +16,10 @@ namespace ProductManagement.Application.Config.Mapping
         public MappingProfile()
         {
             // CRUD
-            CreateMap<ProductCreationDto, Product>()
+            CreateMap<ProductWriteDto, Product>()
                 .ReverseMap();
 
-            CreateMap<ProductDto, Product>()
+            CreateMap<ProductReadDto, Product>()
                 .ReverseMap()
                 .ForMember(dest => dest.CategoryDescription, opt => opt.MapFrom(src => src.Category.Description));
             
@@ -28,7 +28,7 @@ namespace ProductManagement.Application.Config.Mapping
             // Auth & User
             CreateMap<LoginDto, User>().ReverseMap();
             CreateMap<RegisterDto, User>().ReverseMap();
-            CreateMap<UserDto, User>().ReverseMap();
+            CreateMap<UserReadDto, User>().ReverseMap();
         }
     }
 }

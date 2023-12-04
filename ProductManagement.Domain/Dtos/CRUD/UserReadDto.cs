@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductManagement.Domain.Dtos.Auth
+namespace ProductManagement.Domain.Dtos.CRUD
 {
-    public class UserDto
+    public class UserReadDto
     {
         public int Id { get; set; }
         [Required]

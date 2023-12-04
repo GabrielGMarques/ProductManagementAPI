@@ -17,7 +17,7 @@ namespace ProjectManagement.Test
         {
             // Arrange
 
-            var product = new ProductCreationDto
+            var product = new ProductWriteDto
             {
                 Description = "Test Description",
                 ProductCode = "TestCode",
@@ -51,10 +51,10 @@ namespace ProjectManagement.Test
         public async Task GetAllProductsAsync_ShouldReturnAllProducts()
         {
             // Arrange
-            var products = new List<ProductCreationDto>
+            var products = new List<ProductWriteDto>
         {
-            new ProductCreationDto { Id = 1, Description = "Description1", ProductCode = "Code1", ProductReference = "Ref1", Stock = 5, Price = 15.99m, IsActive = true, CategoryId = 1  },
-            new ProductCreationDto { Id = 2, Description = "Description2", ProductCode = "Code2", ProductReference = "Ref2", Stock = 10, Price = 29.99m, IsActive = true, CategoryId = 2  },
+            new ProductWriteDto { Id = 1, Description = "Description1", ProductCode = "Code1", ProductReference = "Ref1", Stock = 5, Price = 15.99m, IsActive = true, CategoryId = 1  },
+            new ProductWriteDto { Id = 2, Description = "Description2", ProductCode = "Code2", ProductReference = "Ref2", Stock = 10, Price = 29.99m, IsActive = true, CategoryId = 2  },
             // Add more products as needed
         };
 
@@ -85,7 +85,7 @@ namespace ProjectManagement.Test
         public async Task CreateProductAsync_ShouldReturnGeneratedId()
         {
             // Arrange
-            var productToCreate = new ProductCreationDto
+            var productToCreate = new ProductWriteDto
             {
                 Description = "NewProduct",
                 Stock = 5,
@@ -109,7 +109,7 @@ namespace ProjectManagement.Test
         {
             var productId = 1;
 
-            var product = new ProductCreationDto
+            var product = new ProductWriteDto
             {
                 Id = productId,
                 Description = "ExistingProduct",
@@ -119,7 +119,7 @@ namespace ProjectManagement.Test
                 CategoryId = 1
             };
 
-            var updatedProduct = new ProductCreationDto
+            var updatedProduct = new ProductWriteDto
             {
                 Id = productId,
                 Description = "UpdatedProduct",
@@ -154,7 +154,7 @@ namespace ProjectManagement.Test
         [TestMethod]
         public async Task DeleteProductAsync_ShouldDeleteProduct()
         {
-            var product = new ProductCreationDto
+            var product = new ProductWriteDto
             {
                 Description = "ExistingProduct",
                 Stock = 10,
@@ -181,7 +181,7 @@ namespace ProjectManagement.Test
             var page = 1;
             var pageSize = 10;
             var products = Enumerable.Range(1, 20)
-                .Select(i => new ProductCreationDto
+                .Select(i => new ProductWriteDto
                 {
                     Description = $"Description{i}",
                     Stock = 5,

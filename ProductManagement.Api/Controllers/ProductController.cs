@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Api.Controllers
 {
@@ -22,7 +23,7 @@ namespace ProductManagement.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ProductDto), 200)]
+        [ProducesResponseType(typeof(ProductReadDto), 200)]
         [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> GetProduct(int id)
         {
@@ -42,7 +43,7 @@ namespace ProductManagement.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ProductDto>), 200)]
+        [ProducesResponseType(typeof(IEnumerable<ProductReadDto>), 200)]
         [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> GetProducts()
         {
@@ -59,7 +60,7 @@ namespace ProductManagement.Api.Controllers
         }
 
         [HttpGet("Paginated")]
-        [ProducesResponseType(typeof(PaginatedResultDto<ProductDto>), 200)]
+        [ProducesResponseType(typeof(PaginatedResult<ProductReadDto>), 200)]
         [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> GetProductsPaginated(int page = 1, int pageSize = 10)
         {
@@ -78,7 +79,7 @@ namespace ProductManagement.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(int), 200)]
         [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> CreateProduct(ProductCreationDto product)
+        public async Task<IActionResult> CreateProduct(ProductWriteDto product)
         {
             try
             {
@@ -95,7 +96,7 @@ namespace ProductManagement.Api.Controllers
         [HttpPut]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> UpdateProduct(ProductCreationDto product)
+        public async Task<IActionResult> UpdateProduct(ProductWriteDto product)
         {
             try
             {

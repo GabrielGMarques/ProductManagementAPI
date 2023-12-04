@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using ProductManagement.Domain.Dtos.Auth;
 using ProductManagement.Domain.Dtos.Responses;
 using ProductManagement.Domain.Dtos;
+using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Application.Services
 {
@@ -27,12 +28,12 @@ namespace ProductManagement.Application.Services
             _configuration = configuration;
         }
 
-        public async Task<ServiceResponse<UserDto?>> GetAsync(int id)
+        public async Task<ServiceResponse<UserReadDto?>> GetAsync(int id)
         {
             var user = await _repository.GetAsync(id);
-            var userDto = _mapper.Map<UserDto>(user);
+            var userDto = _mapper.Map<UserReadDto>(user);
 
-            return new ServiceResponse<UserDto?>(true, userDto, "User retrieved successfully");
+            return new ServiceResponse<UserReadDto?>(true, userDto, "User retrieved successfully");
         }
 
 

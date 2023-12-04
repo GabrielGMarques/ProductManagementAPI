@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ProductManagement.Domain.Entities.Base;
-using ProductManagement.Domain.Dtos.CRUD;
+using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Domain.Contracts.Repository.Base
 {
@@ -16,7 +16,7 @@ namespace ProductManagement.Domain.Contracts.Repository.Base
         Task<int> CreateAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(int id);
-        Task<PaginatedResultDto<T>> GetPaginatedAsync(int page, int pageSize);
+        Task<PaginatedResult<T>> GetPaginatedAsync(int page, int pageSize);
 
     }
 }
