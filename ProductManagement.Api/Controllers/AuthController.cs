@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
-using ProductManagement.Domain.Dtos;
 using ProductManagement.Domain.Dtos.Auth;
 
 namespace ProductManagement.Api.Controllers
@@ -25,14 +24,22 @@ namespace ProductManagement.Api.Controllers
         [ProducesResponseType(typeof(int?), 400)]
         public async Task<IActionResult> Register(RegisterDto userDto)
         {
-            var result = await _authService.Register(userDto);
-
-            if (result.Success)
+            try
             {
-                return Ok(result);
-            }
+                var result = await _authService.Register(userDto);
 
-            return BadRequest(result);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error regstering the user");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpPost("login")]
@@ -40,15 +47,23 @@ namespace ProductManagement.Api.Controllers
         [ProducesResponseType(typeof(string), 401)]
         public async Task<IActionResult> Login(LoginDto userDto)
         {
-            var result = await _authService.Login(userDto);
-
-            if (result.Success)
+            try
             {
-                return Ok(result);
-            }
+                var result = await _authService.Login(userDto);
 
-            return Unauthorized(result);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+
+                return Unauthorized(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error signin the user");
+                return StatusCode(500, "Internal server error");
+            }
         }
-      
+
     }
 }

@@ -1,11 +1,6 @@
 ﻿using ProductManagement.Domain.Contracts.Repository.Base;
 using ProductManagement.Domain.Dtos.Responses;
 using ProductManagement.Domain.Entities.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectManagement.Test.Repository.Base
 {
@@ -73,9 +68,5 @@ namespace ProjectManagement.Test.Repository.Base
             return new Random().Next(1, 1000);
         }
 
-        public Task UpdatePartiallyAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,14 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProductManagement.Application.Config.Mapping;
 using ProductManagement.Application.Services;
-using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Contracts.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductManagement.Application.Config
 {

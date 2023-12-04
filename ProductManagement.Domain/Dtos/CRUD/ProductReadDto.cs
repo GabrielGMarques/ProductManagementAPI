@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ProductManagement.Domain.Dtos.CRUD
+﻿namespace ProductManagement.Domain.Dtos.CRUD
 {
     public class ProductReadDto
     {

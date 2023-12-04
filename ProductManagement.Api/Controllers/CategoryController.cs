@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using ProductManagement.Application.Services;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Dtos.CRUD;
 using ProductManagement.Domain.Dtos.Responses;
@@ -87,6 +87,32 @@ namespace ProductManagement.Api.Controllers
             try
             {
                 await _categoryService.UpdateAsync(id, category);
+                return Ok("Category updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error updating category with ID: {id}.");
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpPatch("{id}")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(string), 500)]
+        public async Task<IActionResult> UpdateCategoryPartially(
+            [FromRoute] int id,
+            [FromBody] JsonPatchDocument<CategoryWriteDto> categoryDoc)
+        {
+            try
+            {
+                var categoryDto = await _categoryService.GetWritableDtoAsync(id);
+                categoryDoc.ApplyTo(categoryDto, ModelState);
+
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                await _categoryService.UpdateAsync(id, categoryDto);
+
                 return Ok("Category updated successfully.");
             }
             catch (Exception ex)

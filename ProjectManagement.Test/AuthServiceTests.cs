@@ -2,10 +2,6 @@
 using ProductManagement.Domain.Dtos.Auth;
 using ProductManagement.Domain.Entities.Enums;
 using ProjectManagement.Test.Builders;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectManagement.Test
 {
@@ -34,7 +30,7 @@ namespace ProjectManagement.Test
 
             var serviceResponse = await authService.Register(registerDto);
 
-            var userId = serviceResponse.Data.Value;
+            var userId = serviceResponse.Data ?? 0;
             // Act
             var result = await authService.GetAsync(userId);
 
