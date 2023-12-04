@@ -24,7 +24,7 @@ namespace ProductManagement.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ProductReadDto> GetAsync(int id)
+        public async Task<ProductReadDto?> GetAsync(int id)
         {
             var product = await _repository.GetAsync(id);
             return _mapper.Map<ProductReadDto>(product);

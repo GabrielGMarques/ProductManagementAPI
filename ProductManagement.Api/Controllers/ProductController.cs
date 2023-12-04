@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using ProductManagement.Api.Common;
+using ProductManagement.Application.Services;
 using ProductManagement.Domain.Contracts.Services;
+using ProductManagement.Domain.Entities;
 using ProductManagement.Domain.Shared.Dtos;
 using ProductManagement.Domain.Shared.Responses;
 
@@ -14,18 +17,21 @@ namespace ProductManagement.Api.Controllers
     {
         private readonly ILogger<ProductController> _logger;
         private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
 
         public ProductController(
             ILogger<ProductController> logger,
-            IProductService productService)
+            IProductService productService,
+            ICategoryService categoryService)
         {
             _logger = logger;
             _productService = productService;
+            _categoryService = categoryService;
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ProductReadDto), 200)]
-        [ProducesResponseType(typeof(string), 500)]
+        [ProducesResponseType(typeof(string), 404)]
         public async Task<IActionResult> GetProduct(int id)
         {
             try
@@ -39,14 +45,13 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error getting product with ID: {id}.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpGet]
         [ProducesResponseType(typeof(PaginatedResult<ProductReadDto>), 200)]
-        [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> GetProductsPaginated(int page = 1, int pageSize = 10)
+        public async Task<IActionResult> GetPaginated(int page = 1, int pageSize = 10)
         {
             try
             {
@@ -56,47 +61,57 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting paginated products.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(int), 200)]
-        [ProducesResponseType(typeof(string), 500)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> CreateProduct(ProductWriteDto product)
         {
             try
             {
+                var category = await _categoryService.GetAsync(product.CategoryId);
+
+                if (category == null)
+                    return BadRequest("The product should have a valid category");
+
                 var productId = await _productService.CreateAsync(product);
                 return Ok(productId);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating product.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(string), 500)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> UpdateProduct([FromRoute] int id, [FromBody] ProductWriteDto product)
         {
             try
             {
+                var category = await _categoryService.GetAsync(product.CategoryId);
+
+                if (category == null)
+                    return BadRequest("The product should have a valid category");
+
                 await _productService.UpdateAsync(id, product);
                 return Ok("Product updated successfully.");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error updating product with ID: {id}.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpPatch("{id}")]
         [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(string), 500)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> UpdateProductPartially(
             [FromRoute] int id,
             [FromBody] JsonPatchDocument<ProductWriteDto> productDoc)
@@ -108,6 +123,11 @@ namespace ProductManagement.Api.Controllers
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+               
+                var category = await _categoryService.GetAsync(productDto.CategoryId);
+
+                if (category == null)
+                    return BadRequest("The product should have a valid category");
 
                 await _productService.UpdateAsync(id, productDto);
 
@@ -116,13 +136,12 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error updating product with ID: {id}.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             try
@@ -133,7 +152,7 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error deleting product with ID: {id}.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
     }

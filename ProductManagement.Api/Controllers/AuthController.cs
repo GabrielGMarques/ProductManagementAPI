@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProductManagement.Api.Common;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Shared.Dtos;
 
@@ -37,8 +38,8 @@ namespace ProductManagement.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error regstering the user");
-                return StatusCode(500, "Internal server error");
+                _logger.LogError(ex, $"Error regstering the user {ex.Message}");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
@@ -60,8 +61,8 @@ namespace ProductManagement.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error signin the user");
-                return StatusCode(500, "Internal server error");
+                _logger.LogError(ex, $"Error signin the user {ex.Message}");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 

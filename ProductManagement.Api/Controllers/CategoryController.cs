@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using ProductManagement.Api.Common;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Shared.Dtos;
 using ProductManagement.Domain.Shared.Responses;
@@ -26,7 +27,7 @@ namespace ProductManagement.Api.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(CategoryReadDto), 200)]
-        [ProducesResponseType(typeof(string), 500)]
+        [ProducesResponseType(typeof(string), 404)]
         public async Task<IActionResult> GetCategory(int id)
         {
             try
@@ -40,15 +41,14 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error getting category with ID: {id}.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
 
         [HttpGet]
         [ProducesResponseType(typeof(PaginatedResult<CategoryReadDto>), 200)]
-        [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> GetProductsPaginated(int page = 1, int pageSize = 10)
+        public async Task<IActionResult> GetPaginated(int page = 1, int pageSize = 10)
         {
             try
             {
@@ -58,13 +58,13 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting paginated products.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(int), 200)]
-        [ProducesResponseType(typeof(string), 500)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> CreateCategory(CategoryWriteDto category)
         {
             try
@@ -75,13 +75,13 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating category.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(string), 500)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> UpdateCategory([FromRoute] int id, [FromBody] CategoryWriteDto category)
         {
             try
@@ -92,13 +92,13 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error updating category with ID: {id}.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpPatch("{id}")]
         [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(string), 500)]
+        [ProducesResponseType(typeof(string), 400)]
         public async Task<IActionResult> UpdateCategoryPartially(
             [FromRoute] int id,
             [FromBody] JsonPatchDocument<CategoryWriteDto> categoryDoc)
@@ -118,13 +118,12 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error updating category with ID: {id}.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
 
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(string), 200)]
-        [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             try
@@ -135,7 +134,7 @@ namespace ProductManagement.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error deleting category with ID: {id}.");
-                return StatusCode(500, "Internal server error");
+                return StatusCode(500, ErrorMessages.UnhandledException);
             }
         }
     }
