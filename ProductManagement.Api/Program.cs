@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text.Json.Serialization;
 using System.Security.Claims;
-using ProductManagement.Api.Formatters;
+using ProductManagement.Api.JsonPatchConfig;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +56,7 @@ builder.Services.AddSwaggerGen(option =>
         Type = SecuritySchemeType.ApiKey
     });
     option.OperationFilter<SecurityRequirementsOperationFilter>();
+    option.DocumentFilter<JsonPatchDocumentFilter>();
 });
 
 var app = builder.Build();
