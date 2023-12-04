@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ProductManagement.Domain.Dtos.Auth;
 using ProductManagement.Domain.Dtos.Responses;
-using ProductManagement.Domain.Dtos;
 using ProductManagement.Domain.Dtos.CRUD;
 
 namespace ProductManagement.Application.Services

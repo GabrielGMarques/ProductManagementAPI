@@ -2,11 +2,6 @@
 using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Entities;
 using ProductManagement.Infra.Data.Config.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Infra.Data.Repository
@@ -39,7 +34,9 @@ namespace ProductManagement.Infra.Data.Repository
 
         public async Task<Category?> GetAsync(int id)
         {
-            return await _dbContext.Categories.FindAsync(id);
+            return await _dbContext.Categories
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x=> x.Id == id);
         }
 
         public async Task<IEnumerable<Category>> GetAsync()
@@ -70,22 +67,6 @@ namespace ProductManagement.Infra.Data.Repository
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task UpdatePartiallyAsync(Category input)
-        {
-            var category = await _dbContext.Categories.FindAsync(input.Id);
-
-            if (category != null)
-            {
-                if(!string.IsNullOrEmpty(input.Description))
-                    category.Description = input.Description;
-                
-                if (input.IsActive != category.IsActive)
-                    category.IsActive = input.IsActive;
-
-                await _dbContext.SaveChangesAsync();
-            }
         }
     }
 }

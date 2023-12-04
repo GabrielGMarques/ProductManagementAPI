@@ -15,9 +15,11 @@ namespace ProductManagement.Infra.Data.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<User> GetAsync(int id)
+        public async Task<User?> GetAsync(int id)
         {
-            return await _dbContext.Users.FindAsync(id);
+            return await _dbContext.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetAsync()
@@ -42,28 +44,6 @@ namespace ProductManagement.Infra.Data.Repository
             }
 
             throw new Exception("User not found");
-        }
-
-        public async Task UpdatePartiallyAsync(User input)
-        {
-            var user = await _dbContext.Users.FindAsync(input.Id);
-
-            if (user != null)
-            {
-                if(!string.IsNullOrEmpty(input.Username))
-                    user.Username = input.Username;
-                
-                if (input.PasswordSalt != null && input.PasswordSalt.Length > 0)
-                    user.PasswordSalt = input.PasswordSalt;
-
-                if (input.PasswordHash != null && input.PasswordHash.Length > 0)
-                    user.PasswordHash = input.PasswordHash;
-
-                if (input.Role !=  user.Role)
-                    user.Role = input.Role;
-
-                await _dbContext.SaveChangesAsync();
-            }
         }
 
         public async Task DeleteAsync(int id)

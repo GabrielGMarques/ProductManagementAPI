@@ -1,9 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ProductManagement.Application.Config.Mapping;
-using ProductManagement.Application.Services;
 using ProductManagement.Domain.Dtos.CRUD;
-using ProductManagement.Domain.Entities;
-using ProductManagement.Infra.Data.Repository;
 using ProjectManagement.Test.Builders;
 
 namespace ProjectManagement.Test
@@ -194,7 +190,7 @@ namespace ProjectManagement.Test
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(pageSize, result.Items.Count());
+            Assert.AreEqual(pageSize, result.Items?.Count());
             Assert.AreEqual(products.Count, result.TotalCount);
             Assert.AreEqual(pageSize, result.PageSize);
         }

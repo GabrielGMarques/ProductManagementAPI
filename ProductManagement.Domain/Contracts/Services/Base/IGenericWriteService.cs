@@ -1,14 +1,11 @@
 ﻿
 namespace ProductManagement.Domain.Contracts.Services.Base
 {
-    public interface IGenericWriteService<T, PartialT>
-        where T: class
-        where PartialT : class
+    public interface IGenericWriteService<T> where T: class
     {
         Task<int> CreateAsync(T entity);
         Task UpdateAsync(int entityId, T entity);
-        Task UpdatePartiallyAsync(int entityId, PartialT entity);
         Task DeleteAsync(int id);
-
+        Task<T> GetWritableDtoAsync(int id);
     }
 }

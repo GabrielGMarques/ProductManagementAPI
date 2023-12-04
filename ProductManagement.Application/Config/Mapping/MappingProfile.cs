@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using ProductManagement.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProductManagement.Domain.Dtos.Auth;
 using ProductManagement.Domain.Dtos.CRUD;
-using ProductManagement.Domain.Dtos;
 
 namespace ProductManagement.Application.Config.Mapping
 {

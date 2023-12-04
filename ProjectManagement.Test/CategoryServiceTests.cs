@@ -149,7 +149,7 @@ namespace ProjectManagement.Test
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(pageSize, result.Items.Count());
+            Assert.AreEqual(pageSize, result.Items?.Count());
             Assert.AreEqual(categories.Count, result.TotalCount);
             Assert.AreEqual(pageSize, result.PageSize);
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Dtos.CRUD;
@@ -96,11 +97,20 @@ namespace ProductManagement.Api.Controllers
         [HttpPatch("{id}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> UpdateProductPartially([FromRoute] int id, [FromBody] ProductWriteDto product)
+        public async Task<IActionResult> UpdateProductPartially(
+            [FromRoute] int id,
+            [FromBody] JsonPatchDocument<ProductWriteDto> productDoc)
         {
             try
             {
-                await _productService.UpdatePartiallyAsync(id, product);
+                var productDto = await _productService.GetWritableDtoAsync(id);
+                productDoc.ApplyTo(productDto, ModelState);
+
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+
+                await _productService.UpdateAsync(id, productDto);
+
                 return Ok("Product updated successfully.");
             }
             catch (Exception ex)

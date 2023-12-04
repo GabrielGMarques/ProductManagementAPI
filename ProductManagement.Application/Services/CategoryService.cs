@@ -24,6 +24,12 @@ namespace ProductManagement.Application.Services
             return _mapper.Map<CategoryReadDto>(category);
         }
 
+        public async Task<CategoryWriteDto> GetWritableDtoAsync(int id)
+        {
+            var category = await _repository.GetAsync(id);
+            return _mapper.Map<CategoryWriteDto>(category);
+        }
+
         public async Task<IEnumerable<CategoryReadDto>> GetAsync()
         {
             var categories = await _repository.GetAsync();
@@ -42,14 +48,6 @@ namespace ProductManagement.Application.Services
             category.Id = id;
 
             await _repository.UpdateAsync(category);
-        }
-
-        public async Task UpdatePartiallyAsync(int id, CategoryWriteDto entity)
-        {
-            var category = _mapper.Map<Category>(entity);
-            category.Id = id;
-
-            await _repository.UpdatePartiallyAsync(category);
         }
 
         public async Task DeleteAsync(int id)
