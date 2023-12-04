@@ -54,7 +54,6 @@ namespace ProductManagement.Application.Services
         {
             await _repository.DeleteAsync(id);
         }
-
         public async Task<PaginatedResult<CategoryReadDto>> GetPaginatedAsync(int page, int pageSize)
         {
             var paginatedResult = await _repository.GetPaginatedAsync(page, pageSize);

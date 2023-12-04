@@ -19,9 +19,9 @@ namespace ProductManagement.Api.JsonPatchConfig
                 Type = "object",
                 Properties = new Dictionary<string, OpenApiSchema>
             {
-                { "op", new OpenApiSchema{ Type = "string" } },
-                { "value", new OpenApiSchema{ Type = "string"} },
-                { "path", new OpenApiSchema{ Type = "string" } }
+                { "op", new OpenApiSchema{ Type = "string", Description = "Ex: replace" } },
+                { "value", new OpenApiSchema{ Type = "string", Description = "Ex: a correct value for the field" } },
+                { "path", new OpenApiSchema{ Type = "string", Description = "Ex: /description" } }
             }
             });
 

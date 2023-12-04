@@ -34,7 +34,6 @@ namespace ProductManagement.Application.Services
             return new ServiceResponse<UserReadDto?>(true, userDto, "User retrieved successfully");
         }
 
-
         public async Task<ServiceResponse<string?>> Login(LoginDto userDto)
         {
             var response = new ServiceResponse<string?>();
@@ -56,7 +55,6 @@ namespace ProductManagement.Application.Services
 
             return response;
         }
-
 
         public async Task<ServiceResponse<int?>> Register(RegisterDto userDto)
         {
