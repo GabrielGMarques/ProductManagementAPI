@@ -19,6 +19,9 @@ namespace ProjectManagement.Test
                 ProductCode = "TestCode",
                 ProductReference = "TestReference",
                 Stock = 10,
+                Height = 10.4m,
+                Width = 10.4m,
+                Weight = 15.99m,
                 Price = 19.99m,
                 IsActive = true,
                 CategoryId = 1
@@ -34,11 +37,14 @@ namespace ProjectManagement.Test
             // Assert
             Assert.IsNotNull(result);
             Assert.AreEqual(productId, result.Id);
-            Assert.AreEqual("Test Description", result.Description);
-            Assert.AreEqual("TestCode", result.ProductCode);
-            Assert.AreEqual("TestReference", result.ProductReference);
-            Assert.AreEqual(10, result.Stock);
-            Assert.AreEqual(19.99m, result.Price);
+            Assert.AreEqual(product.Description, result.Description);
+            Assert.AreEqual(product.ProductCode, result.ProductCode);
+            Assert.AreEqual(product.ProductReference, result.ProductReference);
+            Assert.AreEqual(product.Stock, result.Stock);
+            Assert.AreEqual(product.Price, result.Price);
+            Assert.AreEqual(product.Height, result.Height);
+            Assert.AreEqual(product.Width, result.Width);
+            Assert.AreEqual(product.Weight, result.Weight);
             Assert.IsTrue(result.IsActive);
             Assert.AreEqual(product.CategoryId, result.CategoryId);
         }
@@ -49,8 +55,8 @@ namespace ProjectManagement.Test
             // Arrange
             var products = new List<ProductWriteDto>
         {
-            new ProductWriteDto { Description = "Description1", ProductCode = "Code1", ProductReference = "Ref1", Stock = 5, Price = 15.99m, IsActive = true, CategoryId = 1  },
-            new ProductWriteDto { Description = "Description2", ProductCode = "Code2", ProductReference = "Ref2", Stock = 10, Price = 29.99m, IsActive = true, CategoryId = 2  },
+            new ProductWriteDto { Description = "Description1", ProductCode = "Code1", ProductReference = "Ref1", Stock = 5, Price = 15.99m,  Height = 10.4m, Width = 10.4m, Weight = 15.99m, IsActive = true, CategoryId = 1  },
+            new ProductWriteDto { Description = "Description2", ProductCode = "Code2", ProductReference = "Ref2", Stock = 10, Price = 29.99m, Height = 10.4m, Width = 10.4m, Weight = 15.99m, IsActive = true, CategoryId = 2  },
             // Add more products as needed
         };
 
@@ -68,6 +74,9 @@ namespace ProjectManagement.Test
             CollectionAssert.AreEqual(products.Select(p => p.ProductReference).ToList(), result.Select(p => p.ProductReference).ToList());
             CollectionAssert.AreEqual(products.Select(p => p.Stock).ToList(), result.Select(p => p.Stock).ToList());
             CollectionAssert.AreEqual(products.Select(p => p.Price).ToList(), result.Select(p => p.Price).ToList());
+            CollectionAssert.AreEqual(products.Select(p => p.Height).ToList(), result.Select(p => p.Height).ToList());
+            CollectionAssert.AreEqual(products.Select(p => p.Width).ToList(), result.Select(p => p.Width).ToList());
+            CollectionAssert.AreEqual(products.Select(p => p.Weight).ToList(), result.Select(p => p.Weight).ToList());
             CollectionAssert.AreEqual(products.Select(p => p.IsActive).ToList(), result.Select(p => p.IsActive).ToList());
             CollectionAssert.AreEqual(products.Select(p => p.CategoryId).ToList(), result.Select(p => p.CategoryId).ToList());
 
@@ -118,6 +127,9 @@ namespace ProjectManagement.Test
                 Stock = 15,
                 Price = 29.99m,
                 IsActive = false,
+                Height = 10.4m,
+                Width = 10.4m,
+                Weight = 15.99m,
                 CategoryId = 2
             };
 
@@ -138,6 +150,9 @@ namespace ProjectManagement.Test
             Assert.AreEqual(updatedProduct.ProductReference, productResult.ProductReference);
             Assert.AreEqual(updatedProduct.Stock, productResult.Stock);
             Assert.AreEqual(updatedProduct.Price, productResult.Price);
+            Assert.AreEqual(updatedProduct.Height, productResult.Height);
+            Assert.AreEqual(updatedProduct.Width, productResult.Width);
+            Assert.AreEqual(updatedProduct.Weight, productResult.Weight);
             Assert.AreEqual(updatedProduct.IsActive, productResult.IsActive);
             Assert.AreEqual(updatedProduct.CategoryId, productResult.CategoryId);
         }
