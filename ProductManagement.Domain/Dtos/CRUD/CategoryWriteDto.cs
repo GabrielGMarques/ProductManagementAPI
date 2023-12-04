@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace ProductManagement.Domain.Dtos.CRUD
 {
-    public class CategoryDto
+    public class CategoryWriteDto
     {
-        public int Id { get; set; }
         public string Description { get; set; } = string.Empty;
         public bool IsActive { get; set; }
 

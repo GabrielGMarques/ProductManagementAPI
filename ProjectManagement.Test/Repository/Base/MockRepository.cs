@@ -72,5 +72,10 @@ namespace ProjectManagement.Test.Repository.Base
         {
             return new Random().Next(1, 1000);
         }
+
+        public Task UpdatePartiallyAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

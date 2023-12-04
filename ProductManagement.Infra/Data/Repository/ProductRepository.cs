@@ -75,5 +75,58 @@ namespace ProductManagement.Infra.Data.Repository
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task UpdateCategoryAsync(int productId, int idCategory)
+        {
+            var product = await _dbContext.Products
+                    .Include(p => p.Category)
+                    .FirstAsync(x => x.Id == productId);
+
+            product.CategoryId = idCategory;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdatePartiallyAsync(Product input)
+        {
+            var product = await _dbContext.Products.FindAsync(input.Id);
+
+            if (product != null)
+            {
+                if (!string.IsNullOrEmpty(input.Description))
+                    product.Description = input.Description;
+
+                if (input.Description != product.Description)
+                    product.Description = input.Description;
+                
+                if (input.ProductCode != product.ProductCode)
+                    product.ProductCode = input.ProductCode;
+                
+                if (input.ProductReference != product.ProductReference)
+                    product.ProductReference = input.ProductReference;
+
+                if (input.Stock != product.Stock)
+                    product.Stock = input.Stock;
+                
+                if (input.Price != product.Price)
+                    product.Price = input.Price;
+                
+                if (input.Width != product.Width)
+                    product.Width = input.Width;
+                
+                if (input.Height != product.Height)
+                    product.Height = input.Height;
+                
+                if (input.Weight != product.Weight)
+                    product.Weight = input.Weight;
+                
+                if (input.IsActive != product.IsActive)
+                    product.IsActive = input.IsActive;
+                
+                if (input.CategoryId != product.CategoryId)
+                    product.CategoryId = input.CategoryId;
+
+                await _dbContext.SaveChangesAsync();
+            }
+        }
     }
 }

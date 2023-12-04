@@ -6,7 +6,7 @@ using ProductManagement.Domain.Dtos.Auth;
 namespace ProductManagement.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     public class AuthController : Controller
     {
         private readonly ILogger<AuthController> _logger;

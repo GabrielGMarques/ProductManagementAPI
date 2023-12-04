@@ -53,8 +53,8 @@ namespace ProjectManagement.Test
             // Arrange
             var products = new List<ProductWriteDto>
         {
-            new ProductWriteDto { Id = 1, Description = "Description1", ProductCode = "Code1", ProductReference = "Ref1", Stock = 5, Price = 15.99m, IsActive = true, CategoryId = 1  },
-            new ProductWriteDto { Id = 2, Description = "Description2", ProductCode = "Code2", ProductReference = "Ref2", Stock = 10, Price = 29.99m, IsActive = true, CategoryId = 2  },
+            new ProductWriteDto { Description = "Description1", ProductCode = "Code1", ProductReference = "Ref1", Stock = 5, Price = 15.99m, IsActive = true, CategoryId = 1  },
+            new ProductWriteDto { Description = "Description2", ProductCode = "Code2", ProductReference = "Ref2", Stock = 10, Price = 29.99m, IsActive = true, CategoryId = 2  },
             // Add more products as needed
         };
 
@@ -107,11 +107,8 @@ namespace ProjectManagement.Test
         [TestMethod]
         public async Task UpdateProductAsync_ShouldUpdateProduct()
         {
-            var productId = 1;
-
             var product = new ProductWriteDto
             {
-                Id = productId,
                 Description = "ExistingProduct",
                 Stock = 10,
                 Price = 19.99m,
@@ -121,7 +118,6 @@ namespace ProjectManagement.Test
 
             var updatedProduct = new ProductWriteDto
             {
-                Id = productId,
                 Description = "UpdatedProduct",
                 Stock = 15,
                 Price = 29.99m,
@@ -134,8 +130,7 @@ namespace ProjectManagement.Test
             // Act
             var resultId = await productService.CreateAsync(product);
             
-            updatedProduct.Id = resultId;
-            await productService.UpdateAsync(updatedProduct);
+            await productService.UpdateAsync(resultId, updatedProduct);
 
             // Assert
             var productResult = await productService.GetAsync(resultId);

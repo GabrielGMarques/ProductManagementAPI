@@ -2,11 +2,6 @@
 using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Entities;
 using ProductManagement.Infra.Data.Config.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Infra.Data.Repository
@@ -36,12 +31,41 @@ namespace ProductManagement.Infra.Data.Repository
             await _dbContext.SaveChangesAsync();
             return entity.Id;
         }
-        public async Task UpdateAsync(User entity)
+        public async Task UpdateAsync(User input)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            var user = await _dbContext.Users.FindAsync(input.Id);
+
+            if (user != null)
+            {
+                _dbContext.Entry(input).State = EntityState.Modified;
+                await _dbContext.SaveChangesAsync();
+            }
+
+            throw new Exception("User not found");
         }
-        
+
+        public async Task UpdatePartiallyAsync(User input)
+        {
+            var user = await _dbContext.Users.FindAsync(input.Id);
+
+            if (user != null)
+            {
+                if(!string.IsNullOrEmpty(input.Username))
+                    user.Username = input.Username;
+                
+                if (input.PasswordSalt != null && input.PasswordSalt.Length > 0)
+                    user.PasswordSalt = input.PasswordSalt;
+
+                if (input.PasswordHash != null && input.PasswordHash.Length > 0)
+                    user.PasswordHash = input.PasswordHash;
+
+                if (input.Role !=  user.Role)
+                    user.Role = input.Role;
+
+                await _dbContext.SaveChangesAsync();
+            }
+        }
+
         public async Task DeleteAsync(int id)
         {
             var userToDelete = await _dbContext.Users.FindAsync(id);
@@ -64,6 +88,11 @@ namespace ProductManagement.Infra.Data.Repository
         }
 
         public Task<PaginatedResult<User>> GetPaginatedAsync(int page, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateUniqueAsync(User entity)
         {
             throw new NotImplementedException();
         }

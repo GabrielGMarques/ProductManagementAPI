@@ -2,13 +2,7 @@
 using ProductManagement.Domain.Contracts.Repository;
 using ProductManagement.Domain.Contracts.Services;
 using ProductManagement.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProductManagement.Domain.Dtos.CRUD;
-using ProductManagement.Domain.Contracts.Services.Base;
 using ProductManagement.Domain.Dtos.Responses;
 
 namespace ProductManagement.Application.Services
@@ -24,40 +18,51 @@ namespace ProductManagement.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<CategoryDto> GetAsync(int id)
+        public async Task<CategoryReadDto> GetAsync(int id)
         {
             var category = await _repository.GetAsync(id);
-            return _mapper.Map<CategoryDto>(category);
+            return _mapper.Map<CategoryReadDto>(category);
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAsync()
+        public async Task<IEnumerable<CategoryReadDto>> GetAsync()
         {
             var categories = await _repository.GetAsync();
-            return _mapper.Map<IEnumerable<CategoryDto>>(categories);
+            return _mapper.Map<IEnumerable<CategoryReadDto>>(categories);
         }
 
-        public async Task<int> CreateAsync(CategoryDto entity)
+        public async Task<int> CreateAsync(CategoryWriteDto entity)
         {
             var category = _mapper.Map<Category>(entity);
             return await _repository.CreateAsync(category);
         }
 
-        public async Task UpdateAsync(CategoryDto entity)
+        public async Task UpdateAsync(int id, CategoryWriteDto entity)
         {
             var category = _mapper.Map<Category>(entity);
+            category.Id = id;
+
             await _repository.UpdateAsync(category);
         }
+
+        public async Task UpdatePartiallyAsync(int id, CategoryWriteDto entity)
+        {
+            var category = _mapper.Map<Category>(entity);
+            category.Id = id;
+
+            await _repository.UpdatePartiallyAsync(category);
+        }
+
         public async Task DeleteAsync(int id)
         {
             await _repository.DeleteAsync(id);
         }
 
-        public async Task<PaginatedResult<CategoryDto>> GetPaginatedAsync(int page, int pageSize)
+        public async Task<PaginatedResult<CategoryReadDto>> GetPaginatedAsync(int page, int pageSize)
         {
             var paginatedResult = await _repository.GetPaginatedAsync(page, pageSize);
-            var mappedData = _mapper.Map<IEnumerable<CategoryDto>>(paginatedResult.Items);
+            var mappedData = _mapper.Map<IEnumerable<CategoryReadDto>>(paginatedResult.Items);
 
-            return new PaginatedResult<CategoryDto>
+            return new PaginatedResult<CategoryReadDto>
             {
                 Items = mappedData,
                 TotalCount = paginatedResult.TotalCount,
@@ -65,5 +70,6 @@ namespace ProductManagement.Application.Services
                 PageSize = paginatedResult.PageSize
             };
         }
+
     }
 }

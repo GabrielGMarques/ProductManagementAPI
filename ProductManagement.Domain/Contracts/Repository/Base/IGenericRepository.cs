@@ -15,6 +15,7 @@ namespace ProductManagement.Domain.Contracts.Repository.Base
         Task<IEnumerable<T>> GetAsync();
         Task<int> CreateAsync(T entity);
         Task UpdateAsync(T entity);
+        Task UpdatePartiallyAsync(T entity);
         Task DeleteAsync(int id);
         Task<PaginatedResult<T>> GetPaginatedAsync(int page, int pageSize);
 

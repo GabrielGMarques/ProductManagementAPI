@@ -56,20 +56,25 @@ namespace ProductManagement.Application.Services
             return await _repository.CreateAsync(product);
         }
 
-        public async Task UpdateAsync(ProductWriteDto entity)
+        public async Task UpdateAsync(int id, ProductWriteDto entity)
         {
             var product = _mapper.Map<Product>(entity);
+            product.Id = id;
+
             await _repository.UpdateAsync(product);
+        }
+        public async Task UpdatePartiallyAsync(int id, ProductWriteDto entity)
+        {
+            var product = _mapper.Map<Product>(entity);
+            product.Id = id;
+
+            await _repository.UpdatePartiallyAsync(product);
         }
 
         public async Task DeleteAsync(int id)
         {
             await _repository.DeleteAsync(id);
         }
-
-        public Task UpdateCategoryAsync(int idCategory)
-        {
-            throw new NotImplementedException();
-        }
+    
     }
 }

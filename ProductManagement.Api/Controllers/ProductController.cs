@@ -8,7 +8,7 @@ namespace ProductManagement.Api.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/products")]
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;
@@ -43,23 +43,6 @@ namespace ProductManagement.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ProductReadDto>), 200)]
-        [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> GetProducts()
-        {
-            try
-            {
-                var products = await _productService.GetAsync();
-                return Ok(products);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting products.");
-                return StatusCode(500, "Internal server error");
-            }
-        }
-
-        [HttpGet("Paginated")]
         [ProducesResponseType(typeof(PaginatedResult<ProductReadDto>), 200)]
         [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> GetProductsPaginated(int page = 1, int pageSize = 10)
@@ -93,22 +76,23 @@ namespace ProductManagement.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> UpdateProduct(ProductWriteDto product)
+        public async Task<IActionResult> UpdateProduct([FromRoute] int id, [FromBody] ProductWriteDto product)
         {
             try
             {
-                await _productService.UpdateAsync(product);
+                await _productService.UpdateAsync(id, product);
                 return Ok("Product updated successfully.");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error updating product with ID: {product.Id}.");
+                _logger.LogError(ex, $"Error updating product with ID: {id}.");
                 return StatusCode(500, "Internal server error");
             }
         }
+
 
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(string), 200)]

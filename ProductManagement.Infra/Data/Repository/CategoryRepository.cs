@@ -71,5 +71,21 @@ namespace ProductManagement.Infra.Data.Repository
             _dbContext.Entry(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task UpdatePartiallyAsync(Category input)
+        {
+            var category = await _dbContext.Categories.FindAsync(input.Id);
+
+            if (category != null)
+            {
+                if(!string.IsNullOrEmpty(input.Description))
+                    category.Description = input.Description;
+                
+                if (input.IsActive != category.IsActive)
+                    category.IsActive = input.IsActive;
+
+                await _dbContext.SaveChangesAsync();
+            }
+        }
     }
 }

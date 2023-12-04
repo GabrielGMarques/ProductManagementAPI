@@ -5,7 +5,6 @@ namespace ProductManagement.Domain.Dtos.CRUD
 {
     public class ProductWriteDto
     {
-        public int Id { get; set; }
         [Required]
         [MaxLength(300)]
         public string Description { get; set; } = string.Empty;

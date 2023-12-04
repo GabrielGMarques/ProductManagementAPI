@@ -23,8 +23,9 @@ namespace ProductManagement.Application.Config.Mapping
                 .ReverseMap()
                 .ForMember(dest => dest.CategoryDescription, opt => opt.MapFrom(src => src.Category.Description));
             
-            CreateMap<CategoryDto, Category>().ReverseMap();
-            
+            CreateMap<CategoryReadDto, Category>().ReverseMap();
+            CreateMap<CategoryWriteDto, Category>().ReverseMap();
+
             // Auth & User
             CreateMap<LoginDto, User>().ReverseMap();
             CreateMap<RegisterDto, User>().ReverseMap();

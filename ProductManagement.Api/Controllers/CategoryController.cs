@@ -10,7 +10,7 @@ namespace ProductManagement.Api.Controllers
     [Authorize]
     [Authorize(Roles = "Admin")] //TODO use the UserRole enum
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     public class CategoryController : ControllerBase
     {
         private readonly ILogger<CategoryController> _logger;
@@ -25,7 +25,7 @@ namespace ProductManagement.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(CategoryDto), 200)]
+        [ProducesResponseType(typeof(CategoryReadDto), 200)]
         [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> GetCategory(int id)
         {
@@ -44,25 +44,9 @@ namespace ProductManagement.Api.Controllers
             }
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<CategoryDto>), 200)]
-        [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> GetCategories()
-        {
-            try
-            {
-                var categories = await _categoryService.GetAsync();
-                return Ok(categories);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting categories.");
-                return StatusCode(500, "Internal server error");
-            }
-        }
 
-        [HttpGet("Paginated")]
-        [ProducesResponseType(typeof(PaginatedResult<CategoryDto>), 200)]
+        [HttpGet]
+        [ProducesResponseType(typeof(PaginatedResult<CategoryReadDto>), 200)]
         [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> GetProductsPaginated(int page = 1, int pageSize = 10)
         {
@@ -81,7 +65,7 @@ namespace ProductManagement.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(int), 200)]
         [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> CreateCategory(CategoryDto category)
+        public async Task<IActionResult> CreateCategory(CategoryWriteDto category)
         {
             try
             {
@@ -95,19 +79,19 @@ namespace ProductManagement.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(string), 500)]
-        public async Task<IActionResult> UpdateCategory(CategoryDto category)
+        public async Task<IActionResult> UpdateCategory([FromRoute] int id, [FromBody] CategoryWriteDto category)
         {
             try
             {
-                await _categoryService.UpdateAsync(category);
+                await _categoryService.UpdateAsync(id, category);
                 return Ok("Category updated successfully.");
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error updating category with ID: {category.Id}.");
+                _logger.LogError(ex, $"Error updating category with ID: {id}.");
                 return StatusCode(500, "Internal server error");
             }
         }

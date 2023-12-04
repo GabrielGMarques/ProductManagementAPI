@@ -11,7 +11,7 @@ namespace ProjectManagement.Test
         public async Task GetCategoryAsync_ShouldReturnCategory()
         {
             // Arrange
-            var category = new CategoryDto
+            var category = new CategoryWriteDto
             {
                 Description = "TestCategory",
                 IsActive = true
@@ -34,10 +34,10 @@ namespace ProjectManagement.Test
         public async Task GetAllCategoriesAsync_ShouldReturnAllCategories()
         {
             // Arrange
-            var categories = new List<CategoryDto>
+            var categories = new List<CategoryWriteDto>
             {
-                new CategoryDto { Id = 1, Description = "Category1", IsActive = true },
-                new CategoryDto { Id = 2, Description = "Category2", IsActive = true },
+                new CategoryWriteDto { Description = "Category1", IsActive = true },
+                new CategoryWriteDto { Description = "Category2", IsActive = true },
                 // Add more categories as needed
             };
 
@@ -58,7 +58,7 @@ namespace ProjectManagement.Test
         public async Task CreateCategoryAsync_ShouldReturnGeneratedId()
         {
             // Arrange
-            var categoryToCreate = new CategoryDto
+            var categoryToCreate = new CategoryWriteDto
             {
                 Description = "NewCategory",
                 IsActive = true
@@ -78,18 +78,14 @@ namespace ProjectManagement.Test
         public async Task UpdateCategoryAsync_ShouldUpdateCategory()
         {
             // Arrange
-            var categoryId = 1;
-
-            var category = new CategoryDto
+            var category = new CategoryWriteDto
             {
-                Id = categoryId,
                 Description = "ExistingCategory",
                 IsActive = true
             };
 
-            var updatedCategory = new CategoryDto
+            var updatedCategory = new CategoryWriteDto
             {
-                Id = categoryId,
                 Description = "UpdatedCategory",
                 IsActive = false
             };
@@ -99,8 +95,7 @@ namespace ProjectManagement.Test
             // Act
             var resultId = await categoryService.CreateAsync(category);
 
-            updatedCategory.Id = resultId;
-            await categoryService.UpdateAsync(updatedCategory);
+            await categoryService.UpdateAsync(resultId, updatedCategory);
 
             // Assert
             var categoryResult = await categoryService.GetAsync(resultId);
@@ -115,7 +110,7 @@ namespace ProjectManagement.Test
         public async Task DeleteCategoryAsync_ShouldDeleteCategory()
         {
             // Arrange
-            var category = new CategoryDto
+            var category = new CategoryWriteDto
             {
                 Description = "ExistingCategory",
                 IsActive = true
@@ -139,7 +134,7 @@ namespace ProjectManagement.Test
             var page = 1;
             var pageSize = 10;
             var categories = Enumerable.Range(1, 20)
-                .Select(i => new CategoryDto
+                .Select(i => new CategoryWriteDto
                 {
                     Description = $"Description{i}",
                     IsActive = true
