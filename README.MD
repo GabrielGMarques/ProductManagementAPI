@@ -1,4 +1,4 @@
-# Product Management API (DDD Architecture)
+# Product Management API 
 
 ### Prerequisites
 
